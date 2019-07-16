@@ -60,3 +60,13 @@ public class CompanyControllerTest {
         assertEquals(1000, jsonArray.getInt("employeesNumber"));
     }
 
+    @Test
+    public void return_oocl_employee_when_get_oocl_employee() throws Exception {
+        final MvcResult mvcResult = mockMvc.perform(get("/companies/0/employees")).andExpect(status().isOk()).andReturn();
+        JSONArray jsonArray = new JSONArray(mvcResult.getResponse().getContentAsString());
+        assertEquals(0, jsonArray.getJSONObject(0).getInt("employeeId"));
+        assertEquals("ooclNo1", jsonArray.getJSONObject(0).getString("employeeName"));
+        assertEquals(20, jsonArray.getJSONObject(0).getInt("employeeAge"));
+        assertEquals("F", jsonArray.getJSONObject(0).getString("employeeGender"));
+    }
+
