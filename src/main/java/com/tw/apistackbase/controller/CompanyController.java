@@ -1,5 +1,6 @@
 package com.tw.apistackbase.controller;
 
+import io.micrometer.core.instrument.Meter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,27 +16,27 @@ import java.util.List;
 public class CompanyController {
 
     private List<Company> companies = new ArrayList<>();
-    private List<Employee> employeesOOCL = new ArrayList<>();
-    private List<Employee> employeesCOSCO = new ArrayList<>();
+    private List<Employee> employeesone = new ArrayList<>();
+    private List<Employee> employeestwo = new ArrayList<>();
 
-    private void addEmployeeOOCL() {
-        employeesOOCL.add(new Employee(0, "ooclNo1", 20, "F"));
-        employeesOOCL.add(new Employee(1, "ooclNo2", 21, "M"));
+    private void addEmployeeOne() {
+        employeesone.add(new Employee(0, "ooclNo1", 20, "F"));
+        employeesone.add(new Employee(1, "ooclNo2", 21, "M"));
     }
 
-    private void addEmployeeCOSCO() {
-        employeesCOSCO.add(new Employee(0, "cosco1", 20, "F"));
-        employeesCOSCO.add(new Employee(1, "cosco2", 21, "M"));
+    private void addEmployeeTwo() {
+        employeestwo.add(new Employee(0, "cosco1", 20, "F"));
+        employeestwo.add(new Employee(1, "cosco2", 21, "M"));
     }
 
     private void addCompany() {
-        companies.add(new Company(0, "OOCL", 1000, employeesOOCL));
-        companies.add(new Company(1, "COSCO", 2000, employeesCOSCO));
+        companies.add(new Company(0, "OOCL", 1000, employeesone));
+        companies.add(new Company(1, "COSCO", 2000, employeestwo));
     }
 
     private void initializationData() {
-        addEmployeeOOCL();
-        addEmployeeCOSCO();
+        addEmployeeOne();
+        addEmployeeTwo();
         addCompany();
     }
 
@@ -81,6 +82,18 @@ public class CompanyController {
                 value.setCompanyName(company.getCompanyName());
                 value.setEmployees(company.getEmployees());
                 value.setEmployeesNumber(company.getEmployeesNumber());
+                return ResponseEntity.ok().body(value);
+            }
+        }
+        return null;
+    }
+
+    @DeleteMapping("{companyId}")
+    public ResponseEntity Delete(@PathVariable Integer companyId){
+        initializationData();
+        for (Company value : companies) {
+            if (value.getCompanyId() == companyId) {
+                companies.remove(value);
                 return ResponseEntity.ok().body(value);
             }
         }
