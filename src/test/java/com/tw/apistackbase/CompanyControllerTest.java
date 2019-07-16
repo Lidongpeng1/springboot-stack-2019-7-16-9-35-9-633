@@ -70,3 +70,22 @@ public class CompanyControllerTest {
         assertEquals("F", jsonArray.getJSONObject(0).getString("employeeGender"));
     }
 
+    @Test
+    public void return_status_is_created_when_put_new_company() throws Exception {
+        Employee employee1 = new Employee(0, "ooclNo1", 20, "F");
+        Employee employee2 = new Employee(1, "ooclNo2", 21, "M");
+        List<Employee> employees = new ArrayList<>();
+        employees.add(employee1);
+        employees.add(employee2);
+        Company company = new Company(0, "OOCL", 1000, employees);
+        JSONObject jsonObject = new JSONObject(company);
+        String objectJson = jsonObject.toString();
+        this.mockMvc.perform(post("/companies").contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(objectJson)).andExpect(status().isCreated());
+    }
+
+//    @Test
+//    public void return_revised_company_when_put_company_info() throws Exception {
+//
+//    }
+}
