@@ -84,8 +84,8 @@ public class CompanyControllerTest {
                 .content(objectJson)).andExpect(status().isCreated());
     }
 
-    @Test
-    public void return_revised_company_when_put_company_info() throws Exception {
-
-    }
+//    @Test
+//    public void return_revised_company_when_put_company_info() throws Exception {
+//
+//    }
 }
