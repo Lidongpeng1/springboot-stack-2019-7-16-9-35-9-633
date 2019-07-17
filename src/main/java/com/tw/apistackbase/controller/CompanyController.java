@@ -20,18 +20,18 @@ public class CompanyController {
     private List<Employee> employeestwo = new ArrayList<>();
 
     private void addEmployeeOne() {
-        employeesone.add(new Employee(0, "ooclNo1", 20, "F"));
-        employeesone.add(new Employee(1, "ooclNo2", 21, "M"));
+        employeesone.add(new Employee(0, "employeeone", 20, "F"));
+        employeesone.add(new Employee(1, "employeetwo", 21, "M"));
     }
 
     private void addEmployeeTwo() {
-        employeestwo.add(new Employee(0, "cosco1", 20, "F"));
-        employeestwo.add(new Employee(1, "cosco2", 21, "M"));
+        employeestwo.add(new Employee(0, "employeethree", 20, "F"));
+        employeestwo.add(new Employee(1, "employeefour", 21, "M"));
     }
 
     private void addCompany() {
-        companies.add(new Company(0, "OOCL", 1000, employeesone));
-        companies.add(new Company(1, "COSCO", 2000, employeestwo));
+        companies.add(new Company(0, "companyone", 1000, employeesone));
+        companies.add(new Company(1, "companytwo", 2000, employeestwo));
     }
 
     private void initializationData() {
